@@ -26,7 +26,7 @@ const Sidebar = () => {
     return (
         <div className="w-1/5 bg-gray-400 h-screen">
             {/* sidebar-header */}
-            <div className="text-center">SiteName</div> 
+            <div className="text-center">Cryptomania</div> 
             {/* Sidebar items and links */}
             <Navitems navLinks={navLinks}/>
         </div>
