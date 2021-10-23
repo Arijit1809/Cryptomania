@@ -5,6 +5,6 @@
 
 Current look :
 
-![Preview](Preview.png)
+![Preview](Screenshot.png)
 
 *The UI is subjected to improve once the functionality is implemented*
