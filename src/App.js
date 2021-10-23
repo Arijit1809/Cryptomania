@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import {Sidebar, Homepage, News, Exchanges, Cryptocurrencies} from './components';
+import {Switch, Route} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    return (
+        <div className="flex flex-row">
+            <Sidebar/>
+            <Switch>
+                <Route path="/cryptocurrencies">
+                    <Cryptocurrencies/>
+                </Route>
+                <Route path="/news">
+                    <News/>
+                </Route>
+                <Route path="/exchanges">
+                    <Exchanges/>
+                </Route>
+                <Route path="/">
+                    <Homepage/>
+                </Route>
+            </Switch>
+        </div>
+    )
 }
 
-export default App;
+export default App
