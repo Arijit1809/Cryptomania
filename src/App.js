@@ -1,22 +1,25 @@
-import {Sidebar, Homepage, News, Exchanges, Cryptocurrencies} from './components';
-import {Switch, Route} from 'react-router-dom';
+import { Sidebar, Homepage, News, Exchanges, Cryptocurrencies,CryptoDetails } from './components';
+import { Switch, Route } from 'react-router-dom';
 
 const App = () => {
     return (
         <div className="flex flex-row">
-            <Sidebar/>
+            <Sidebar />
             <Switch>
                 <Route path="/cryptocurrencies">
-                    <Cryptocurrencies/>
+                    <Cryptocurrencies />
+                </Route>
+                <Route exact path="/crypto/:coinId">
+                    <CryptoDetails />
                 </Route>
                 <Route path="/news">
-                    <News/>
+                    <News />
                 </Route>
                 <Route path="/exchanges">
-                    <Exchanges/>
+                    <Exchanges />
                 </Route>
                 <Route path="/">
-                    <Homepage/>
+                    <Homepage />
                 </Route>
             </Switch>
         </div>
