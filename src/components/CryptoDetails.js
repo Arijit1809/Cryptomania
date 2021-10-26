@@ -1,32 +1,17 @@
-import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import millify from 'millify';
 import HTMLReactParser from 'html-react-parser';
 // icons imported for current time-period, to be substituted later
 import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, StopOutlined, TrophyOutlined, CheckOutlined, NumberOutlined, ThunderboltOutlined } from '@ant-design/icons';
 
+import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from '../services/cryptoApi';
 
 const CryptoDetails = () => {
     const { coinId } = useParams();
-    const [coin, setCoin] = useState();
-    const [loading, setLoading] = useState(true)
-    useEffect(() => {
-        getApi()
-    }, [])
-    const getApi = async () => {
-        const response = await fetch(`https://coinranking1.p.rapidapi.com/coin/${coinId}`, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "coinranking1.p.rapidapi.com",
-                "x-rapidapi-key": "a19c8df793msh5c4ea359fdc151ap1adc51jsn3da7e90cf7a5"
-            }
-        })
-        setLoading(false)
-        const data = await response.json();
-        setCoin(data?.data?.coin);
-        console.log(coin);
-    }
-    if (loading) return <div>loading...</div>;
+    const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
+    const coin = data?.data?.coin;
+
+    if (isFetching) return <div>loading...</div>;
 
     const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
     return (
@@ -41,20 +26,20 @@ const CoinDetails = ({coin}) =>{
         { title: 'Rank', value: coin?.rank, icon: <NumberOutlined /> },
         { title: '24h Volume', value: `$ ${coin?.volume && millify(coin?.volume)}`, icon: <ThunderboltOutlined /> },
         { title: 'Market Cap', value: `$ ${coin?.marketCap && millify(coin?.marketCap)}`, icon: <DollarCircleOutlined /> },
-        // { title: 'All-time-high(daily avg.)', value: `$ ${millify(coin?.allTimeHigh.price)}`, icon: <TrophyOutlined /> },
+        { title: 'All-time-high(daily avg.)', value: `$ ${millify(coin?.allTimeHigh.price)}`, icon: <TrophyOutlined /> },
     ];
 
     const genericStats = [
         { title: 'Number Of Markets', value: coin?.numberOfMarkets, icon: <FundOutlined /> },
         { title: 'Number Of Exchanges', value: coin?.numberOfExchanges, icon: <MoneyCollectOutlined /> },
         { title: 'Aprroved Supply', value: coin?.approvedSupply ? <CheckOutlined /> : <StopOutlined />, icon: <ExclamationCircleOutlined /> },
-        // { title: 'Total Supply', value: `$ ${millify(coin?.totalSupply)}`, icon: <ExclamationCircleOutlined /> },
-        // { title: 'Circulating Supply', value: `$ ${millify(coin?.circulatingSupply)}`, icon: <ExclamationCircleOutlined /> },
+        { title: 'Total Supply', value: `$ ${millify(coin?.totalSupply)}`, icon: <ExclamationCircleOutlined /> },
+        { title: 'Circulating Supply', value: `$ ${millify(coin?.circulatingSupply)}`, icon: <ExclamationCircleOutlined /> },
     ];
 
 
     return (
-        <div className="overflow-auto h-screen">
+        <div>
             <div>
                 <div>
                     <h2 className="coin-name">
@@ -98,7 +83,7 @@ const CoinDetails = ({coin}) =>{
             <div className="coin-desc-link">
                 <div className="coin-desc">
                     <h3 className="coin-details-heading">What is {coin?.name}?</h3>
-                    {/* coin?.description&&{HTMLReactParser(coin.description)} */}
+                    coin?.description&&{HTMLReactParser(coin.description)}
                 </div>
                 <div className="coin-links">
                     <h3 className="coin-details-heading">{coin?.name} Links</h3>

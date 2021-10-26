@@ -30,29 +30,33 @@ const News = () => {
     }
     return (
         <div>
-            {/* {console.log(news)} */}
-            {news.value.map((news,index)=>{
-                return(
-                    <NewsCard news={news} key={index}/>
-                )
-            })}
+            <h1 className="text-4xl m-4">News</h1>
+            <div className="grid grid-cols-3">
+                {/* {console.log(news)} */}
+                {news.value.map((news, index) => {
+                    return (
+                        <NewsCard news={news} key={index} />
+                    )
+                })}
+            </div>
         </div>
+
     )
 }
 
 const NewsCard = ({ news }) => {
     return (
-        <div>
+        <div className="p-4 m-4 rounded-md shadow-xl bg-white">
             <a href={news.url} target="_blank" rel="noreferrer">
-                <div className="news-image-container">
-                    <h1>{news.name}</h1>
+                <div className="flex items-center mb-4">
+                    <h1 className="text-lg font-medium">{news.name}</h1>
                     <img src={news?.image?.thumbnail?.contentUrl} alt="" />
                 </div>
-                <p>{news.description.length > 100 ? `${news.description.substring(0, 100)}...` : news.description}</p>
-                <div className="provider-container">
-                    <div>
-                        <img src={news.provider[0]?.image?.thumbnail?.contentUrl} alt="" />
-                        <p>{news.provider[0]?.name}</p>
+                <p className="mb-4 text-sm">{news.description.length > 100 ? `${news.description.substring(0, 100)}...` : news.description}</p>
+                <div className="flex justify-between items-center text-sm">
+                    <div className="flex items-center ">
+                        <img className="h-10" src={news.provider[0]?.image?.thumbnail?.contentUrl} alt="" />
+                        <p className="ml-2">{news.provider[0]?.name}</p>
                     </div>
                     <p>{moment(news.datePublished).startOf('ss').fromNow()}</p>
                 </div>

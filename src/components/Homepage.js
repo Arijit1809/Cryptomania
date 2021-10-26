@@ -33,15 +33,15 @@ const Homepage = () => {
     }
 
     return (
-        <div className="w-4/5 h-screen overflow-auto">
-            <h1 className="mb-5">Homepage</h1>
+        <div>
+            <h1 className="m-4 text-4xl">Homepage</h1>
             {/* Stats Section */}
-            <div className="grid grid-cols-2"> 
-                <div>Total Cryptocurrencies : {stats?.data?.stats?.total}</div>
-                <div>Total Exchanges : {stats?.data?.stats?.totalExchanges}</div>
-                <div>Total Market Cap : {stats?.data?.stats?.totalMarketCap}</div>
-                <div>Total 24h Volume : {stats?.data?.stats?.total24hVolume}</div>
-                <div>Total Markets : {stats?.data?.stats?.totalMarkets}</div>
+            <div className="grid grid-cols-2 mx-4"> 
+                <div className="text-xl my-6">Total Cryptocurrencies  {stats?.data?.stats?.total}</div>
+                <div className="text-xl my-6">Total Exchanges  {stats?.data?.stats?.totalExchanges}</div>
+                <div className="text-xl my-6">Total Market Cap  {stats?.data?.stats?.totalMarketCap}</div>
+                <div className="text-xl my-6">Total 24h Volume  {stats?.data?.stats?.total24hVolume}</div>
+                <div className="text-xl my-6">Total Markets  {stats?.data?.stats?.totalMarkets}</div>
             </div>
             <Cryptocurrencies/>
             <News/>

@@ -2,7 +2,12 @@ module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        Roboto : ["Roboto","sans-serif"],
+        Poppins : ["Poppins","sans-serif"],
+      },
+    },
   },
   variants: {
     extend: {},
